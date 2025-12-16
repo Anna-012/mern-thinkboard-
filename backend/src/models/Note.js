@@ -12,9 +12,21 @@ const noteSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    // Add User Id
+  userId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"User",
+    required:true
+  }
 },
+  
+
    {timestamps:true}  // createdAt, updatedAt
 );
+
+
+
+
 
 const Note = mongoose.model("Note", noteSchema)
 
