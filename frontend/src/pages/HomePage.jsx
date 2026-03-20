@@ -36,13 +36,8 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const load = async () => {
-      setLoading(true);
-      await fetchNotes();
-    };
-
-    load();
-  }, [location.state]);
+    fetchNotes();
+  }, []);
 
   return (
     <div className="min-h-screen">
