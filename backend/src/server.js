@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: "*",
+    origin: ["http://localhost:5173", "https://mern-thinkboard-eta.vercel.app"],
     credentials: true,
   }),
 );
