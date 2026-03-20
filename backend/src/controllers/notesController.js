@@ -2,7 +2,7 @@ import Note from "../models/Note.js";
 
 export async function getAllNotes(req, res) {
   try {
-    const notes = await Note.find({ user: req.user.id });
+    const notes = await Note.find({ userId: req.user.id });
     res.status(200).json(notes);
   } catch (error) {
     console.error("Error in getAllNotes controller", error);
@@ -14,7 +14,7 @@ export async function getNoteById(req, res) {
   try {
     const note = await Note.findOne({
       _id: req.params.id,
-      user: req.user.id,
+      userId: req.user.id,
     });
 
     if (!note) {
@@ -35,7 +35,7 @@ export async function createNote(req, res) {
     const note = new Note({
       title,
       content,
-      user: req.user.id,
+      userId: req.user.id,
     });
 
     const savedNote = await note.save();
@@ -51,9 +51,9 @@ export async function updateNote(req, res) {
     const { title, content } = req.body;
 
     const updatedNote = await Note.findOneAndUpdate(
-      { _id: req.params.id, user: req.user.id },
+      { _id: req.params.id, userId: req.user.id },
       { title, content },
-      { new: true }
+      { new: true },
     );
 
     if (!updatedNote) {
@@ -71,7 +71,7 @@ export async function deleteNote(req, res) {
   try {
     const deletedNote = await Note.findOneAndDelete({
       _id: req.params.id,
-      user: req.user.id,
+      userId: req.user.id,
     });
 
     if (!deletedNote) {
