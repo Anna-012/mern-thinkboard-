@@ -20,10 +20,14 @@ const HomePage = () => {
       setNotes(res.data);
       setIsRateLimited(false);
     } catch (error) {
+      console.error("Fetch notes error:", error);
+
       if (error.response?.status === 429) {
         setIsRateLimited(true);
       } else {
-        toast.error("Failed to load notes");
+        if (notes.length === 0) {
+          toast.error("Failed to load notes");
+        }
       }
     } finally {
       setLoading(false);
