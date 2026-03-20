@@ -26,7 +26,7 @@ app.use(
         ? "https://yourfrontenddomain.com"
         : ["http://localhost:5173", "http://localhost:5174"],
     credentials: true,
-  })
+  }),
 );
 
 /* ================= ROUTES ================= */
@@ -36,7 +36,7 @@ app.use("/api/notes", auth, rateLimiter, noteRoutes); // protected
 /* ================= FRONTEND ================= */
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
-  app.get("*", (req, res) => {
+  app.use((req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
   });
 }
