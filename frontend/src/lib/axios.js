@@ -1,11 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL:
-    import.meta.env.MODE === "development"
-      ? "http://localhost:5001/api"
-      : "/api",
-  timeout: 10000, // optional but safe
+  baseURL: import.meta.env.VITE_API_URL,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },
@@ -23,7 +20,7 @@ api.interceptors.request.use(
 
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 // 🚨 RESPONSE → handle auth errors
@@ -40,7 +37,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;
