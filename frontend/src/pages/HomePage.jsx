@@ -30,16 +30,13 @@ const HomePage = () => {
     }
   };
 
-  // First render par call
   useEffect(() => {
-    fetchNotes();
-  }, []);
+    const load = async () => {
+      setLoading(true);
+      await fetchNotes();
+    };
 
-  // Navigate ke baad refresh flag check karo
-  useEffect(() => {
-    if (location.state?.refresh) {
-      fetchNotes();
-    }
+    load();
   }, [location.state]);
 
   return (
